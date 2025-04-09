@@ -1,0 +1,4 @@
+{"name": "Baal", "skills": ["count", "move", "read"], "ave_level": 4, "max_age": 639}
+{"name": "Agares", "skills": ["build", "predict", "read"], "ave_level": 4, "max_age": 757}
+{"name": "Shax", "skills": ["count", "swim"], "ave_level": 10, "max_age": 808}
+{"name": "Lane", "skills": ["swim"], "ave_level": 7, "max_age": 824}
