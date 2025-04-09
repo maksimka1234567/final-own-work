@@ -121,13 +121,13 @@ def main(name):
         mags = list(reader)[1:]
         for mag in mags:
             if mag[1] == name:
-                level = mag[3]
+                university, level = mag[2], mag[3]
                 break
         params = cursor.execute("""
             SELECT id, power 
             FROM Education 
-            WHERE power > (SELECT power FROM Education WHERE id = ?)
-        """, (level,)).fetchall()
+            WHERE power > (SELECT power FROM Education WHERE id = ? AND univer_id = ?)
+        """, (level, university)).fetchall()
         mags = list(filter(lambda x: int(x[3]) in [p[0] for p in params], mags))
         power_dict = {p[0]: p[1] for p in params}
         mags.sort(key=lambda x: (-int(x[4]), -power_dict.get(int(x[3]), float('-inf')), x[1]))
