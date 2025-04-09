@@ -123,11 +123,12 @@ def main(name):
             if mag[1] == name:
                 university, level = mag[2], mag[3]
                 break
+        university_id = cursor.execute("SELECT id FROM Universities WHERE university = ?", (university,)).fetchone()
         params = cursor.execute("""
             SELECT id, power 
             FROM Education 
             WHERE power > (SELECT power FROM Education WHERE id = ? AND univer_id = ?)
-        """, (level, university)).fetchall()
+        """, (level, university_id)).fetchall()
         mags = list(filter(lambda x: int(x[3]) in [p[0] for p in params], mags))
         power_dict = {p[0]: p[1] for p in params}
         mags.sort(key=lambda x: (-int(x[4]), -power_dict.get(int(x[3]), float('-inf')), x[1]))
